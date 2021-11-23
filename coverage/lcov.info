@@ -1,0 +1,17 @@
+TN:
+SF:src/services/sayHelloWorld.js
+FN:1,Object.<anonymous>.exports.sayHello
+FNF:1
+FNH:1
+FNDA:2,Object.<anonymous>.exports.sayHello
+DA:1,1
+DA:2,2
+DA:3,2
+LF:3
+LH:3
+BRDA:1,0,0,2
+BRDA:2,1,0,1
+BRDA:2,2,0,1
+BRF:3
+BRH:3
+end_of_record

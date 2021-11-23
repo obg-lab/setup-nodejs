@@ -1,0 +1,31 @@
+{
+  "name": "setup-nodejs",
+  "version": "0.0.1",
+  "description": "projeto de demonstração",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/obg-lab/setup-nodejs.git"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "demo"
+  ],
+  "author": "Bruno Germano <bruno@egermano.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/obg-lab/setup-nodejs/issues"
+  },
+  "homepage": "https://github.com/obg-lab/setup-nodejs#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "jest": "^27.3.1"
+  }
+}
