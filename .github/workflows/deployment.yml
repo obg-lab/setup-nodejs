@@ -1,0 +1,55 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Deploy
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, develop]
+
+jobs:
+  test-ci:
+    runs-on: ubuntu-20.04
+
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm ci
+    - run: npm run test
+  deploy-test:
+    needs: test-ci
+    if: github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-20.04
+    concurrency: deploy-to-test
+    environment: test
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 10.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+      - run: docker build -t setup-nodejs .
+      - run: echo "Deploy"
+  deploy-production:
+    needs: test-ci
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-20.04
+    concurrency: deploy-to-production
+    environment: production
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 10.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+      - run: docker build -t setup-nodejs .
+      - run: echo "Deploy"
